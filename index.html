@@ -3,13 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script href="js/head.js"></script>
-    <script>
+    <link rel="stylesheet" href="plugins/css/bootstrap.min.css">
+    <link rel="stylesheet" href="plugins/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="plugins/css/bootstrap-reboot.min.css">
+    <link rel="script" href="plugins/js/bootstrap.min.js">
+    <link rel="script" href="plugins/js/bootstrap.bundle.min.js">
 
-    </script>
 </head>
-
 <body>
+<div>
+    <div>
 
+        <div>
+
+            <h2>origin</h2>
+            <label>
+                <input type="text" id="origin"/>
+            </label>
+            <h2>old code</h2>
+            <label>
+                <input type="text" id="old" />
+            </label>
+            <h2>new code</h2>
+            <label>
+                <input type="text" id="new" />
+            </label>
+        </div>
+    </div>
+</div>
 </body>
+
+<script>
+    function convert(price) {
+        var codeMap = ['V', 'H', 'K', 'L', 'M', 'N', 'R', 'S', 'T', 'U'];
+        var result = "";
+        price.toString().split("").forEach(function (e) {
+            if (/^\d$/.test(e)) {
+                result += codeMap[parseInt(e)];
+            } else {
+                result += "输入错误";
+            }
+        });
+        return result;
+    }
+    function convertHex(price) {
+        var codeMap = ['V', 'H', 'K', 'L', 'M', 'N', 'R', 'S', 'T', 'U'];
+        var result = "";
+        parseInt(price).toString(16).split("").forEach(function (e) {
+            if (/^\d$/.test(e)) {
+                result += codeMap[parseInt(e)];
+            } else if (/^[a-fA-F]$/.test(e)) {
+                result += e.toUpperCase();
+            } else {
+                result += "输入错误";
+            }
+        });
+        return result;
+    }
+    function convertOriginOld(origin) {
+        var codeMap = ['V', 'H', 'K', 'L', 'M', 'N', 'R', 'S', 'T', 'U'];
+        var result = "";
+
+        for (var char in origin.toString()) {
+            if (char in codeMap) {
+                result += codeMap.indexOf(char);
+            } else {
+                result += "输入错误";
+            }
+        }
+    }
+    function convertOriginNew(origin) {
+        var codeMap = ['V', 'H', 'K', 'L', 'M', 'N', 'R', 'S', 'T', 'U'];
+        var result = "";
+        origin.toString().split("").forEach(function (e) {
+            if (e in codeMap) {
+                result += codeMap.indexOf(e);
+            } else if (/^[a-fA-F]$/.test(e)) {
+                result += e;
+            } else {
+                result += "输入错误";
+            }
+        });
+        return result;
+    }
+
+    // document.getElementById("origin").onchange = function (ev) {
+    //     var x = document.getElementById("origin").value;
+    //     document.getElementById("old").value = convert(x);
+    //     document.getElementById("new").value = convertHex(x);
+    // };
+    document.getElementById("old").onchange = function (ev) {
+        var x = document.getElementById("old").value;
+        document.getElementById("origin").value = convertOriginOld(x);
+        document.getElementById("new").value = convertHex(document.getElementById("origin").value);
+    };
+
+    // document.getElementById("new").onchange = function (ev) {
+    //     var x = document.getElementById("new").value;
+    //     document.getElementById("old").value = convert(document.getElementById("origin").value);
+    //     document.getElementById("origin").value = convertOriginNew(x);
+    // };
+</script>
 </html>
