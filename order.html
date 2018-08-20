@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody id="table_body">
+
+        </tbody>
+    </table>
+</div>
+
+<form class="form-group">
+    <input class="form-control" type="number" id="price" title="price"/>
+    <input class="form-control" type="number" id="weight" title="weight" />
+    <input class="btn btn-primary" type="button" onclick="inc()" value="add"/>
+</form>
+
+<script>
+    class Price {
+        constructor(unitPrice, weight) {
+            this.unitPrice = unitPrice;
+            this.weight = weight;
+        }
+
+        total() {
+            return parseFloat(this.unitPrice * this.weight);
+        }
+
+        get(index) {
+            let result = "<tr>";
+            result += "<td>" + (index + 1) + "</td>";
+            result += "<td>" + this.unitPrice + "</td>";
+            result += "<td>" + this.weight + "</td>";
+            result += "<td>" + this.total() + "</td>";
+            result += "</tr>";
+            return result;
+        }
+    }
+
+    let gems = [];
+
+    function inc() {
+        let price = document.getElementById("price").value;
+        let weight = document.getElementById("weight").value;
+
+        if (price == null || price === "")
+        {
+            alert("error");
+            return false;
+        }
+
+        if (weight == null || weight === "")
+        {
+            alert("error");
+            return false;
+        }
+
+        gems.push(new Price(price, weight));
+        let index = gems.length - 1;
+        document.getElementById("table_body").innerHTML += gems[index].get(index) + "<br />";
+
+        document.getElementById("price").value = "";
+        document.getElementById("weight").value = "";
+    }
+</script>
+</body>
+</html>
