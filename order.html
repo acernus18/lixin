@@ -34,16 +34,25 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-            <th>Email</th>
+            <th>序号</th>
+            <th>宝石克拉价</th>
+            <th>宝石重量</th>
+            <th>宝石价格</th>
         </tr>
         </thead>
         <tbody id="table_body">
 
         </tbody>
+        <tbody>
+            <tr>
+                <td>订单总价</td>
+                <td> </td>
+                <td> </td>
+                <td id="total">0</td>
+            </tr>
+        </tbody>
     </table>
+
 </div>
 
 <form class="form-group">
@@ -96,6 +105,12 @@
         let index = gems.length - 1;
         document.getElementById("table_body").innerHTML += gems[index].get(index) + "<br />";
 
+        let sum = 0;
+        for (let gem of gems) {
+            sum += gem.total();
+        }
+
+        document.getElementById("total").innerText = sum.toString();
         document.getElementById("price").value = "";
         document.getElementById("weight").value = "";
     }
