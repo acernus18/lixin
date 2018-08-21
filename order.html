@@ -11,7 +11,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">立信</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -30,36 +30,50 @@
     </div>
 </nav>
 <br>
-<div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>序号</th>
-            <th>宝石克拉价</th>
-            <th>宝石重量</th>
-            <th>宝石价格</th>
-        </tr>
-        </thead>
-        <tbody id="table_body">
 
-        </tbody>
-        <tbody>
+
+<div class="container">
+    <div class="card">
+        <table class="table card-body">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>宝石重量</th>
+                <th>宝石克拉价</th>
+                <th>宝石价格</th>
+            </tr>
+            </thead>
+            <tbody id="table_body">
+            </tbody>
+            <tbody>
             <tr>
                 <td>订单总价</td>
                 <td> </td>
                 <td> </td>
                 <td id="total">0</td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div class="card">
+        <form class="card-body">
+            <div class="form-group">
+                <label class="form-group">重量</label>
+                <input class="form-control" type="number" id="weight" title="weight" />
+            </div>
+            <div class="form-group">
+                <label class="form-group">单价</label>
+                <input class="form-control" type="number" id="price" title="price"/>
+            </div>
+            <div class="form-group">
+                <input class="btn btn-primary btn-block" type="button" onclick="inc()" value="add"/>
+            </div>
+
+        </form>
+    </div>
 
 </div>
-
-<form class="form-group">
-    <input class="form-control" type="number" id="price" title="price"/>
-    <input class="form-control" type="number" id="weight" title="weight" />
-    <input class="btn btn-primary" type="button" onclick="inc()" value="add"/>
-</form>
 
 <script>
     class Price {
@@ -75,8 +89,8 @@
         get(index) {
             let result = "<tr>";
             result += "<td>" + (index + 1) + "</td>";
-            result += "<td>" + this.unitPrice + "</td>";
             result += "<td>" + this.weight + "</td>";
+            result += "<td>" + this.unitPrice + "</td>";
             result += "<td>" + this.total() + "</td>";
             result += "</tr>";
             return result;
@@ -109,7 +123,6 @@
         for (let gem of gems) {
             sum += gem.total();
         }
-
         document.getElementById("total").innerText = sum.toString();
         document.getElementById("price").value = "";
         document.getElementById("weight").value = "";
