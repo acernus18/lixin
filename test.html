@@ -37,12 +37,14 @@
 </div>
 
 <script>
+    let timer = null;
+
     document.getElementById("testBtn").ontouchstart = function () {
-        setTimeout(longPress, 800);
+        timer = setTimeout(longPress, 800);
     };
 
     document.getElementById("testBtn").ontouchend = function () {
-        clearTimeout(longPress());
+        clearTimeout(timer);
     };
 
 
