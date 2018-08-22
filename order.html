@@ -120,17 +120,6 @@
         let index = gems.length - 1;
         document.getElementById("table_body").innerHTML += gems[index].get(index) + "<br />";
 
-        console.log(document.getElementById(index.toString()));
-
-        document.getElementById(index.toString()).onmousedown = function () {
-            timer = setTimeout(() => remove(index), 800);
-        };
-
-        document.getElementById(index.toString()).onmouseup = function () {
-            clearTimeout(timer);
-            timer = null;
-        };
-
         let sum = 0;
         for (let gem of gems) {
             sum += gem.total();
@@ -138,18 +127,36 @@
         document.getElementById("total").innerText = sum.toFixed(2).toString();
         document.getElementById("price").value = "";
         document.getElementById("weight").value = "";
-    }
 
-    function onTouchBegin(index) {
-        timer = setTimeout(() => remove(index), 800);
-    }
-    
-    function onTouchEnd() {
-        clearTimeout(timer);
+        bindRemoveListner();
     }
 
     function remove(index) {
-        confirm("delete" + index)
+        let result = confirm("delete" + index);
+        if (result) {
+            gems.splice(index, 1);
+            document.getElementById("table_body").innerHTML = "";
+            for (let i = 0; i < gems.length; i++) {
+                document.getElementById("table_body").innerHTML += gems[i].get(i) + "<br />";
+            }
+
+            bindRemoveListner();
+
+            let sum = 0;
+            for (let gem of gems) {
+                sum += gem.total();
+            }
+            document.getElementById("total").innerText = sum.toFixed(2).toString();
+            document.getElementById("price").value = "";
+            document.getElementById("weight").value = "";
+        }
+    }
+
+    function bindRemoveListner() {
+        for (let i = 0; i < gems.length; i++) {
+            document.getElementById(i.toString()).ontouchstart = () => timer = setTimeout(() => remove(i), 800);
+            document.getElementById(i.toString()).ontouchend = () => clearTimeout(timer);
+        }
     }
 
 
