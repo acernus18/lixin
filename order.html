@@ -120,11 +120,11 @@
         let index = gems.length - 1;
         document.getElementById("table_body").innerHTML += gems[index].get(index) + "<br />";
 
-        document.getElementById(index).ontouchstart = function () {
+        document.getElementById(index.toString()).ontouchstart = function () {
             timer = setTimeout(() => remove(index), 800);
         };
 
-        document.getElementById(index).ontouchend = function () {
+        document.getElementById(index.toString()).ontouchend = function () {
             clearTimeout(timer);
             timer = null;
         };
