@@ -106,13 +106,13 @@
 
         if (price == null || price === "")
         {
-            alert("error");
+            alert("输入价格出错");
             return false;
         }
 
         if (weight == null || weight === "")
         {
-            alert("error");
+            alert("输入重量出错");
             return false;
         }
 
@@ -128,11 +128,11 @@
         document.getElementById("price").value = "";
         document.getElementById("weight").value = "";
 
-        bindRemoveListner();
+        bindRemover();
     }
 
     function remove(index) {
-        let result = confirm("确认删除: " + (index + 1) + "吗?");
+        let result = confirm("确认删除: " + (index + 1) + " 吗?");
         if (result) {
             gems.splice(index, 1);
             document.getElementById("table_body").innerHTML = "";
@@ -140,7 +140,7 @@
                 document.getElementById("table_body").innerHTML += gems[i].get(i) + "<br />";
             }
 
-            bindRemoveListner();
+            bindRemover();
 
             let sum = 0;
             for (let gem of gems) {
@@ -152,7 +152,7 @@
         }
     }
 
-    function bindRemoveListner() {
+    function bindRemover() {
         for (let i = 0; i < gems.length; i++) {
             document.getElementById(i.toString()).ontouchstart = () => timer = setTimeout(() => remove(i), 800);
             document.getElementById(i.toString()).ontouchend = () => clearTimeout(timer);
